@@ -1,39 +1,26 @@
 import { type User, regularUser } from './user-model.ts';
 
 
-const formatName = (firstName : string, lastName : string) => {
+const formatName = (firstName : User['firstName'], lastName : User['lastName']) => {
   return `${firstName} ${lastName}`;
 };
 
-type Address  = {
-  street: string,
-  city: string,
-  country: string,
-  postalCode:string
-}
-
-const formatAddress = (address: Address) => {
+const formatAddress = (address: User['address']) => {
   return `${address.street}, ${address.city}, ${address.country} ${address.postalCode}`;
 };
 
 
-
-const isCandidateForDeletion = (role: string, isActive : boolean) => {
+const isCandidateForDeletion = (role: User['role'], isActive : User['isActive']) => {
   return role === 'guest' && !isActive;
 };
 
-interface Settings {
-  language: string
-}
 
-const getUserLocale = (settings : Settings) => {
+const getUserLocale = (settings : User['settings']) => {
   return settings.language || 'en';
 };
 
-type DateOfBirth = Date;
-type MinAge = number | undefined;
 
-const validateAge = (dateOfBirth : DateOfBirth, minAge: MinAge) => {
+const validateAge = (dateOfBirth : User['dateOfBirth'], minAge: User['age']) => {
   const today = new Date();
   const age = today.getFullYear() - dateOfBirth.getFullYear();
   const monthDiff = today.getMonth() - dateOfBirth.getMonth();
@@ -45,18 +32,13 @@ const validateAge = (dateOfBirth : DateOfBirth, minAge: MinAge) => {
   return age >= minAge;
 };
 
-type PhoneNumbers = Array<string>;
 
-const hasPhone = (phoneNumbers: PhoneNumbers) => {
+const hasPhone = (phoneNumbers: User['phoneNumbers']) => {
   return phoneNumbers.length > 0;
 };
 
-type Email = string;
-interface Settings {
-  notifications : boolean
-}
 
-const canSendEmailNotification = (email: Email, settings : Settings) => {
+const canSendEmailNotification = (email: User['email'], settings : User['settings']) => {
   return Boolean(email) && settings.notifications;
 };
 
