@@ -33,3 +33,9 @@ export class UserModule {
 
 const userModule = new UserModule();
 export const { addUser, removeUser, getUser, filterUsers } = userModule;
+
+
+
+// wylaczenie w package.json "compilerOptions": {
+//   "strict": false
+// }
